@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="school">
-        <item>학교1</item>
-        <item>학교2</item>
-        <item>학교3</item>
-    </string-array>
-</resources>

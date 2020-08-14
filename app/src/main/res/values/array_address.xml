@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="address">
-        <item>주소1</item>
-        <item>주소2</item>
-        <item>주소3</item>
-    </string-array>
-</resources>
