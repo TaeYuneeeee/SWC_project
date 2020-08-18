@@ -71,14 +71,14 @@ public class MainActivity extends AppCompatActivity {
                                 // ...
                             }
                         });
-                
+
 
             }
         });
         btMember.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(MainActivity.this,memberlayout.class);
+                Intent in = new Intent(MainActivity.this,register.class);
                 startActivity(in);
             }
         });

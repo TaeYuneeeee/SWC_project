@@ -12,4 +12,12 @@
         android:text="fragment1"
         android:textSize="30dp"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="회원정보가기"
+        android:id="@+id/fg_bt1"/>
+
+
 </LinearLayout>
