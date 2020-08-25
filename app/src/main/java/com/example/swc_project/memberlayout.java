@@ -30,8 +30,9 @@ public class memberlayout extends AppCompatActivity {
     private Spinner spn_birth,spn_address,spn_school,spn_subject;
     private DatabaseReference mDatabase;
 //    private FirebaseDatabase database = FirebaseDatabase.getInstance();
-
+    EditText et_mem_lay;
     Button bt_member;
+    TextView test1;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,13 +43,15 @@ public class memberlayout extends AppCompatActivity {
         spn_address = (Spinner)findViewById(R.id.spn_address);
         spn_school = (Spinner)findViewById(R.id.spn_school);
         spn_subject = (Spinner)findViewById(R.id.spn_subject);
-
+        et_mem_lay = (EditText)findViewById(R.id.et_mem_lay);
+        test1 = (TextView)findViewById(R.id.text1);
         final String[] text_birth = new String[1];//스피너값이 배열값이기 때문
         final String[] text_address = new String[1];;
         final String[] text_school = new String[1];;
         final String[] text_subject = new String[1];;
 
-//        DatabaseReference myRef = database.getReference("User");
+        final String[] nickname = new String[1];
+               nickname[0] = et_mem_lay.getText().toString();
 
         spn_birth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -94,30 +97,33 @@ public class memberlayout extends AppCompatActivity {
 
             }
         });
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String test = user.getUid(); // user 아이디 갖고옴 이걸 토대로 분류분류하면될듯
+        test1.setText(test);
         bt_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(memberlayout.this,"입력",Toast.LENGTH_LONG).show();
-                writeNewPost(text_birth[0],text_address[0],text_school[0],text_subject[0]);
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("User");
-                myRef.setValue("Hello, World!");
+                writeNewPost(text_birth[0],text_address[0],text_school[0],text_subject[0],nickname[0]);
+//                FirebaseDatabase database = FirebaseDatabase.getInstance();
+//                DatabaseReference myRef = database.getReference("User");
+//                myRef.setValue("Hello, World!");
 //파이어베이스 입력할때 AVD 구동을 다시시작 해보고 하기
             }
         });
 
 
     }
-    private void writeNewPost(String birth, String address, String school, String subject) {
+//아이디당 한번만 입력 후에는 업데이트 방식
+    private void writeNewPost(String birth, String address, String school, String subject, String nickname) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
-        String key = mDatabase.child("posts").push().getKey();
-        userdata post = new userdata(birth, address, school, subject);
+        String key = mDatabase.child("user-infor").push().getKey();
+        userdata post = new userdata(birth, address, school, subject,nickname);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/posts/" + key, postValues);
-        childUpdates.put("/user-posts/" + birth + "/" + key, postValues);
 
         mDatabase.updateChildren(childUpdates);
     }
