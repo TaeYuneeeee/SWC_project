@@ -98,13 +98,14 @@ public class memberlayout extends AppCompatActivity {
             }
         });
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String test = user.getUid(); // user 아이디 갖고옴 이걸 토대로 분류분류하면될듯
-        test1.setText(test);
+        final String userId = user.getUid(); // user 아이디 갖고옴 이걸 토대로 분류분류하면될
+        test1.setText(et_mem_lay.getText());//닉네임 확인용 고쳐야됌 닉네임 안들어감
+
         bt_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(memberlayout.this,"입력",Toast.LENGTH_LONG).show();
-                writeNewPost(text_birth[0],text_address[0],text_school[0],text_subject[0],nickname[0]);
+                writeMemberInfo(userId,text_birth[0],text_address[0],text_school[0],text_subject[0],nickname[0]);
 //                FirebaseDatabase database = FirebaseDatabase.getInstance();
 //                DatabaseReference myRef = database.getReference("User");
 //                myRef.setValue("Hello, World!");
@@ -114,16 +115,15 @@ public class memberlayout extends AppCompatActivity {
 
 
     }
-//아이디당 한번만 입력 후에는 업데이트 방식
-    private void writeNewPost(String birth, String address, String school, String subject, String nickname) {
+
+    private void writeMemberInfo(String userId, String birth, String address, String school, String subject, String nickname) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
-        String key = mDatabase.child("user-infor").push().getKey();
         userdata post = new userdata(birth, address, school, subject,nickname);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/posts/" + key, postValues);
+        childUpdates.put("/memberinfor/" + userId, postValues);
 
         mDatabase.updateChildren(childUpdates);
     }

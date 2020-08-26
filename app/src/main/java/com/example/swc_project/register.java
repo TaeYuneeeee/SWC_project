@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -48,6 +49,7 @@ public class register  extends AppCompatActivity {
                     Toast.makeText(register.this,"Please insert Password",Toast.LENGTH_LONG).show();
                     return;
                 }
+                User user = new User(st_regt_etID);
                 mAuth.createUserWithEmailAndPassword(st_regt_etID, st_regt_etPW)
                         .addOnCompleteListener(register.this, new OnCompleteListener<AuthResult>() {
                             @Override
