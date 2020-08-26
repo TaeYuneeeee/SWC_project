@@ -44,14 +44,13 @@ public class memberlayout extends AppCompatActivity {
         spn_school = (Spinner)findViewById(R.id.spn_school);
         spn_subject = (Spinner)findViewById(R.id.spn_subject);
         et_mem_lay = (EditText)findViewById(R.id.et_mem_lay);
-        test1 = (TextView)findViewById(R.id.text1);
+
         final String[] text_birth = new String[1];//스피너값이 배열값이기 때문
         final String[] text_address = new String[1];;
         final String[] text_school = new String[1];;
         final String[] text_subject = new String[1];;
 
-        final String[] nickname = new String[1];
-               nickname[0] = et_mem_lay.getText().toString();
+
 
         spn_birth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -99,13 +98,14 @@ public class memberlayout extends AppCompatActivity {
         });
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         final String userId = user.getUid(); // user 아이디 갖고옴 이걸 토대로 분류분류하면될
-        test1.setText(et_mem_lay.getText());//닉네임 확인용 고쳐야됌 닉네임 안들어감
+
 
         bt_member.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final String nickname = et_mem_lay.getText().toString();
                 Toast.makeText(memberlayout.this,"입력",Toast.LENGTH_LONG).show();
-                writeMemberInfo(userId,text_birth[0],text_address[0],text_school[0],text_subject[0],nickname[0]);
+                writeMemberInfo(userId,text_birth[0],text_address[0],text_school[0],text_subject[0],nickname);
 //                FirebaseDatabase database = FirebaseDatabase.getInstance();
 //                DatabaseReference myRef = database.getReference("User");
 //                myRef.setValue("Hello, World!");
@@ -121,10 +121,10 @@ public class memberlayout extends AppCompatActivity {
         // /posts/$postid simultaneously
         userdata post = new userdata(birth, address, school, subject,nickname);
         Map<String, Object> postValues = post.toMap();
-
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/memberinfor/" + userId, postValues);
 
+        //key값 뺀이유는 아이디 하나당 정보 하나기 때문에
         mDatabase.updateChildren(childUpdates);
     }
 }

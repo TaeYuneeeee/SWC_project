@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Post {
     public String uid;
-    public String author;
+//    public String author;
     public String title;
     public String body;
     public int starCount = 0;
@@ -17,9 +17,9 @@ public class Post {
         // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
-    public Post(String uid, String author, String title, String body) {
+    public Post(String uid, String title, String body) {
         this.uid = uid;
-        this.author = author;
+//        this.author = author;
         this.title = title;
         this.body = body;
     }
@@ -29,7 +29,7 @@ public class Post {
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("uid", uid);
-        result.put("author", author);
+//        result.put("author", author);
         result.put("title", title);
         result.put("body", body);
         result.put("starCount", starCount);
