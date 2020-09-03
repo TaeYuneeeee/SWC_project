@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.swc_project.NewPostActivity;
+import com.example.swc_project.R;
+
 public class Fragment2 extends Fragment {
     ViewGroup viewGroup;
 
@@ -23,7 +26,7 @@ public class Fragment2 extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(getActivity(),NewPostActivity.class);
+                Intent in = new Intent(getActivity(), NewPostActivity.class);
                 startActivity(in);
             }
         });

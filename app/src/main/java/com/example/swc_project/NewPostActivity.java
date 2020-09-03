@@ -4,40 +4,41 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.model.Post;
-import com.example.model.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 //import com.google.firebase.quickstart.database.databinding.ActivityNewPostBinding;
 //import com.google.firebase.quickstart.database.java.models.Post;
 //import com.google.firebase.quickstart.database.java.models.User;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class NewPostActivity extends BaseActivity {
     private static final String TAG = "NewPostActivity";
     private static final String REQUIRED = "Required";
-
+    private ArrayList<RecyItem> mMyData;
     // [START declare_database_ref]
     private DatabaseReference mDatabase;
     // [END declare_database_ref]
     FloatingActionButton fab_check;
     EditText fieldTitle ;
     EditText fieldBody;
-
+    RecyItem recyItem;
     @Override
     protected void onCreate(Bundle savedInstanceStace){
         super.onCreate(savedInstanceStace);
         setContentView(R.layout.activity_new_post);
+        mMyData = new ArrayList<>();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         fab_check = (FloatingActionButton)findViewById(R.id.fabSubmitPost);
         fieldTitle = (EditText)findViewById(R.id.fieldTitle);
@@ -48,11 +49,13 @@ public class NewPostActivity extends BaseActivity {
             public void onClick(View view) {
                 final String title = fieldTitle.getText().toString();
                 final String body = fieldBody.getText().toString();
+//                initDataset(title,body);
                 submitPost(title,body);
 
             }
         });
     }
+
     private void submitPost(String title1, String body1){
 
         final String title = title1;
@@ -83,6 +86,7 @@ public class NewPostActivity extends BaseActivity {
 //                        }
                         //위에꺼 user 어떻게 넣을지가 문제임 DB이쁘장하게 구성하고싶은데 겁나 헷갈림 좀더 개발한후 하든
                         //갑자기 끌릴때 하든 해야될듯합니당
+
                         writeNewPost(userId, title, body);
 
                     }
@@ -107,6 +111,11 @@ public class NewPostActivity extends BaseActivity {
         childUpdates.put("/user-posts/" + userId + "/" + key, postValues);
 
         mDatabase.updateChildren(childUpdates);
+    }
+    private void initDataset(String title, String body) {
+        //for Test
+        mMyData.clear();
+        mMyData.add(new RecyItem(title,body));
     }
 
 

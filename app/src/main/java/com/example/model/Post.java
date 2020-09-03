@@ -37,5 +37,6 @@ public class Post {
 
         return result;
     }
+
     // [END post_to_map]
 }

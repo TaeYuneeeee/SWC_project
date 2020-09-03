@@ -22,7 +22,7 @@ public class Fragment1 extends Fragment {
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(getActivity(),memberlayout.class);
+                Intent in = new Intent(getActivity(), memberlayout.class);
                 startActivity(in);
             }
         });
