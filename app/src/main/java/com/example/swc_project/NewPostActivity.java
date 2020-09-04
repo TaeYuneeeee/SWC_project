@@ -112,11 +112,7 @@ public class NewPostActivity extends BaseActivity {
 
         mDatabase.updateChildren(childUpdates);
     }
-    private void initDataset(String title, String body) {
-        //for Test
-        mMyData.clear();
-        mMyData.add(new RecyItem(title,body));
-    }
+
 
 
 }

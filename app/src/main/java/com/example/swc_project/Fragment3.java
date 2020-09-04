@@ -29,9 +29,10 @@ public class Fragment3 extends Fragment {
 
     private RecyclerView mRecyclerView;
     private Adapter mAdapter;
+
     private RecyclerView.LayoutManager mLayoutManager;
+
     private ArrayList<RecyItem> mMyData;
-//    private ArrayList<Post> mMyData;
 
     private Context context;
     private FirebaseDatabase database;
@@ -42,36 +43,34 @@ public class Fragment3 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment3,container,false);
-        database = FirebaseDatabase.getInstance(); // 파이어베이스 데이터베이스 연동
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.Recy);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.scrollToPosition(0);
-        mAdapter = new Adapter(mMyData);
-        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+        mAdapter = new Adapter(mMyData);
         mMyData = new ArrayList<>();
 //        initDataset();
-        //databaseReference = database.getReference("posts"); // DB 테이블 연결
         databaseReference = database.getInstance().getReference("posts"); // DB 테이블 연결
-//        databaseReference = FirebaseDatabase.getInstance().getReference().child("posts);
-        //databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
                 mMyData.clear(); // 기존 배열리스트가 존재하지않게 초기화
-/*                for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 데이터 List를 추출해냄
-                    RecyItem item = snapshot.getValue(RecyItem.class); // 만들어뒀던 User 객체에 데이터를 담는다.
-//                    mMyData.add(item); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
-                    mMyData.add(snapshot.getValue(RecyItem.class));
-                }*/
-/*                for(DataSnapshot ds : dataSnapshot.getChildren()){
-                    RecyItem item = ds.getValue(RecyItem.class);
-                    mMyData.add(item);
-                }*/
-//                Post post = dataSnapshot.getValue(Post.class);
+                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 데이터 List를 추출해냄
+                    RecyItem Item = snapshot.getValue(RecyItem.class);
+                    mMyData.add(Item); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
+//                     String value = snapshot.getValue().toString();
+//                     Map<String,Object> td = (HashMap<String,Object>)dataSnapshot.getValue();
+//                     Log.d("Database","Value is :"+value);
+//                     Log.d("Database","Value is :"+td);
+//                       Log.d("Database","Value is :"+Item);
+                     //로그로 확인학는 방식 아주 꿀팁입니다... 이거 꼭 이용하세연!
+                }
                 mAdapter.notifyDataSetChanged();; // 리스트 저장 및 새로고침
             }
 
@@ -88,11 +87,11 @@ public class Fragment3 extends Fragment {
     }
 
 
-    private void initDataset() {
-        //for Test
-        mMyData.clear();
-        mMyData.add(new RecyItem("test","test1"));
-    }
+//    private void initDataset() {
+//        //for Test
+//        mMyData.clear();
+//        mMyData.add(new RecyItem("test","test1"));
+//    }
 
 
 

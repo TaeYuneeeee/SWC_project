@@ -25,25 +25,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {//Recyler
         this.mData = persons;
 
     }
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView textView1;
-        TextView textView2;
-//        TextView textView3;
-        ImageView imageView1;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textView1 = itemView.findViewById(R.id.postTitle);
-            textView2 = itemView.findViewById(R.id.postBody);
-//            textView3 = itemView.findViewById(R.id.postNumStars);
-//            imageView1 = itemView.findViewById(R.id.star);
-        }
-    }
-    // 생성자에서 데이터 리스트 객체를 전달받음.
-    Adapter(ArrayList<RecyItem> list) {
-//        Adapter(ArrayList<Post> list) {
-        mData = list ;
-    }
-
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -62,13 +43,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {//Recyler
 
         RecyItem item = mData.get(position) ;
 
-        holder.textView1.setText(item.getTitle()) ;
-        holder.textView2.setText(item.getbody()) ;
-//        holder.textView1.setText(item.title) ;
-//        holder.textView2.setText(item.body) ;
-//        holder.textView3.setText(item.getPostNumStars()) ;
-
-
+//        holder.textView1.setText(item.getTitle()) ;
+//        holder.textView2.setText(item.getbody()) ;
+//위아래 둘다됨
+        holder.textView1.setText(mData.get(position).getTitle());
+        holder.textView2.setText(mData.get(position).getbody());
 
     }
 
@@ -76,7 +55,28 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {//Recyler
     @Override
     public int getItemCount() {
         return (mData != null ? mData.size() : 0) ;
+        //위에꺼가 안전함 이걸로해야됨 그래야 오류잡기 편함
 //        return mData.size();
+    }
+
+    // 생성자에서 데이터 리스트 객체를 전달받음.
+    Adapter(ArrayList<RecyItem> list) {
+//        Adapter(ArrayList<Post> list) {
+        mData = list ;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        TextView textView1;
+        TextView textView2;
+        //        TextView textView3;
+        ImageView imageView1;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            textView1 = itemView.findViewById(R.id.postTitle);
+            textView2 = itemView.findViewById(R.id.postBody);
+//            textView3 = itemView.findViewById(R.id.postNumStars);
+//            imageView1 = itemView.findViewById(R.id.star);
+        }
     }
 
 }

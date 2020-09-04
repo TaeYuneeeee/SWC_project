@@ -1,21 +1,23 @@
 package com.example.swc_project;
 public class RecyItem {
-//    private Drawable iconDraWable;
-    private String title;
+    private String uid;
     private String body;
-    private String postNumStars;
+    private String title;
 
-//    public Drawable getIconDraWable() {
-//        return iconDraWable;
-//    }
-//
-//    public void setIconDraWable(Drawable iconDraWable) {
-//        this.iconDraWable = iconDraWable;
-//    }
-    public RecyItem(String title, String body){
-        this.title = title;
+    public RecyItem(String uid, String body, String title){
+        this.uid = uid;
         this.body = body;
-//        this.postNumStars = postNumStars;
+        this.title = title;
+    }
+    public RecyItem(){
+//이거 꼭 넣어야돼 파이어베이스 이용시에는 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 몰랐따고!!!!!!!!!!!!
+    }
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getTitle() {
@@ -34,11 +36,4 @@ public class RecyItem {
         this.body = body;
     }
 
-//    public String getPostNumStars() {
-//        return postNumStars;
-//    }
-//
-//    public void setPostNumStars(String postNumStars) {
-//        this.postNumStars = postNumStars;
-//    }
 }
