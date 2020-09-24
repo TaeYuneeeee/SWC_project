@@ -20,6 +20,7 @@
         <activity android:name = ".memberlayout" android:label="개인정보"/>
         <activity android:name=".register" android:label="회원가입"/>
         <activity android:name=".NewPostActivity" android:label="청원글쓰기"/>
+        <activity android:name=".PostDetailAct" android:label="글 보기"/>
 
     </application>
 

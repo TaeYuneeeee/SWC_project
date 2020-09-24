@@ -37,6 +37,7 @@ public class Fragment3 extends Fragment {
     private Context context;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
+    DatabaseReference databaseReference1;
 
 
     @Nullable
@@ -55,6 +56,8 @@ public class Fragment3 extends Fragment {
         mAdapter = new Adapter(mMyData);
         mMyData = new ArrayList<>();
 //        initDataset();
+        databaseReference1 = FirebaseDatabase.getInstance().getReference().child("posts");
+        String key = databaseReference1.push().getKey();
         databaseReference = database.getInstance().getReference("posts"); // DB 테이블 연결
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -63,12 +66,12 @@ public class Fragment3 extends Fragment {
                 mMyData.clear(); // 기존 배열리스트가 존재하지않게 초기화
                  for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // 반복문으로 데이터 List를 추출해냄
                     RecyItem Item = snapshot.getValue(RecyItem.class);
+//                     Log.d("Database","Value is :"+Item);
                     mMyData.add(Item); // 담은 데이터들을 배열리스트에 넣고 리사이클러뷰로 보낼 준비
 //                     String value = snapshot.getValue().toString();
 //                     Map<String,Object> td = (HashMap<String,Object>)dataSnapshot.getValue();
 //                     Log.d("Database","Value is :"+value);
 //                     Log.d("Database","Value is :"+td);
-//                       Log.d("Database","Value is :"+Item);
                      //로그로 확인학는 방식 아주 꿀팁입니다... 이거 꼭 이용하세연!
                 }
                 mAdapter.notifyDataSetChanged();; // 리스트 저장 및 새로고침
@@ -85,14 +88,10 @@ public class Fragment3 extends Fragment {
 
 
     }
-
-
-//    private void initDataset() {
+//   private void initDataset() {
 //        //for Test
 //        mMyData.clear();
 //        mMyData.add(new RecyItem("test","test1"));
 //    }
-
-
 
 }

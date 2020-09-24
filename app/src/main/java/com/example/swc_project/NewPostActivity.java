@@ -1,4 +1,5 @@
 package com.example.swc_project;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -103,7 +104,7 @@ public class NewPostActivity extends BaseActivity {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = mDatabase.child("posts").push().getKey();
-        Post post = new Post(userId, title, body);
+        Post post = new Post(userId, title, body, key);
         Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();

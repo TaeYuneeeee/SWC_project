@@ -1,8 +1,6 @@
 package com.example.swc_project;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -11,13 +9,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
+import com.example.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -105,6 +100,7 @@ public class memberlayout extends AppCompatActivity {
             public void onClick(View view) {
                 final String nickname = et_mem_lay.getText().toString();
                 Toast.makeText(memberlayout.this,"입력",Toast.LENGTH_LONG).show();
+                User user = new User(nickname);
                 writeMemberInfo(userId,text_birth[0],text_address[0],text_school[0],text_subject[0],nickname);
 //                FirebaseDatabase database = FirebaseDatabase.getInstance();
 //                DatabaseReference myRef = database.getReference("User");
