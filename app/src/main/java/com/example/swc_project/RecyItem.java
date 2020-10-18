@@ -4,11 +4,16 @@ public class RecyItem {
     private String body;
     private String title;
     private String key;
+    private int starCount;
+
+
+
     public RecyItem(String uid, String body, String title, String key){
         this.uid = uid;
         this.body = body;
         this.title = title;
         this.key = key;
+
     }
     public RecyItem(){
 //이거 꼭 넣어야돼 파이어베이스 이용시에는 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 몰랐따고!!!!!!!!!!!!
@@ -45,5 +50,11 @@ public class RecyItem {
         this.key = key;
     }
 
+    public int getStarCount() {
+        return starCount;
+    }
 
+    public void setStarCount(int starCount) {
+        this.starCount = starCount;
+    }
 }

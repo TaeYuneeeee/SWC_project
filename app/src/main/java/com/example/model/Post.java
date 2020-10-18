@@ -36,7 +36,7 @@ public class Post {
         result.put("body", body);
         result.put("key", key);
         result.put("starCount", starCount);
-//        result.put("stars", stars);
+        result.put("stars", stars);
 
         return result;
     }

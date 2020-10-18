@@ -33,6 +33,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {//Recyler
 
     }
 
+
     // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -58,6 +59,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {//Recyler
         final String sttitle = mData.get(position).getTitle() ;
         final String stbody = mData.get(position).getbody() ;
         final String key = mData.get(position).getkey();
+
         holder.textView1.setText(mData.get(position).getTitle());
 //        holder.textView2.setText(mData.get(position).getbody());
         holder.itemView.setOnClickListener(new View.OnClickListener(){
