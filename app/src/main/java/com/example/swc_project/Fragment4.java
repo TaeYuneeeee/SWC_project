@@ -2,7 +2,6 @@ package com.example.swc_project;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,12 +50,11 @@ public class Fragment4 extends Fragment {
                 "393000000110", "397000000101", "400000000196", "403000000093",
                 "554000000154", "378000000167", "383000000541", "383000000503",
                 "400000000241", "390000000182", "386000000009", "383000000511", "383000000508"};
-        for(int arrayint=0;arrayint<5;arrayint++) {
-            final int finalArrayint = arrayint;
+
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    data = getXmlData(service_Id_gy[finalArrayint]);
+                    data = getXmlData();
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -67,19 +65,22 @@ public class Fragment4 extends Fragment {
                     });
                 }
             }).start();
-        }
+
 
 //        MyAsyncTask myAsyncTask = new MyAsyncTask();
 //        myAsyncTask.execute();
 
         return view;
     }
-    String getXmlData(String check){
-        String queryUrl="http://api.korea.go.kr/openapi/svc?serviceKey=qJQdGNCT%2F3GLGiFxm%2F4dl38xVUMfclbVD7wUMriztrFn%2BmE9QyhdhHdwd7uitI%2BzNCrMDIzrrBYfh96LMhpkcQ%3D%3D&format=xml&svcId="+check;
+    String getXmlData(){
+        String queryUrl="http://api.korea.go.kr/openapi/svc?serviceKey=qJQdGNCT%2F3GLGiFxm%2F4dl38xVUMfclbVD7wUMriztrFn%2BmE9QyhdhHdwd7uitI%2BzNCrMDIzrrBYfh96LMhpkcQ%3D%3D&format=xml&svcId=383000000538";
 
         try{
-            boolean b_locationNo1 = false;
-            boolean b_plateNo1 =false;
+            boolean b_svcId = false;
+            boolean b_svcNm = false;
+            boolean b_jrsdDptAllNm = false;
+            boolean b_sportTgl = false;
+            boolean b_svcCts = false;
 
             URL url= new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성.
             InputStream is= url.openStream(); //url위치로 입력스트림 연결
@@ -101,23 +102,49 @@ public class Fragment4 extends Fragment {
                             ht = new f4_ap_item();
                         }
                         if (parser.getName().equals("svcId")) {
-                            b_locationNo1 = true;
-                            Log.d("check","확인 : "+b_locationNo1);
+                            b_svcId = true;
+//                            Log.d("check","확인 : "+b_locationNo1);
                         }
                         if (parser.getName().equals("svcNm")){
-                            b_plateNo1 = true;
+                            b_svcNm = true;
                         }
+                        if (parser.getName().equals("jrsdDptAllNm")){
+                            b_jrsdDptAllNm = true;
+                        }
+                        if (parser.getName().equals("sportTg")){
+                            b_sportTgl = true;
+                        }
+                        if (parser.getName().equals("svcCts")){
+                            b_svcCts = true;
+                        }
+
                         break;
 
                     case XmlPullParser.TEXT:
-                        if(b_locationNo1){
+                        if(b_svcId){
+                            ht.setSvcId(parser.getText());
+                            String abc = parser.getText();
+                            b_svcId = false;
+                        }
+                        if(b_svcNm) {
                             ht.setSvcNm(parser.getText());
                             String abc = parser.getText();
-                            Log.d("Bus",abc);
-                            b_locationNo1 = false;
-                        } else if(b_plateNo1) {
+                            b_svcNm = false;
+                        }
+                        if(b_jrsdDptAllNm) {
+                            ht.setJrsdDptAllNm(parser.getText());
+                            String abc = parser.getText();
+                            b_jrsdDptAllNm = false;
+                        }
+                        if(b_sportTgl) {
+                            ht.setSportTgl(parser.getText());
+                            String abc = parser.getText();
+                            b_sportTgl = false;
+                        }
+                        if(b_svcCts) {
                             ht.setSvcCts(parser.getText());
-                            b_plateNo1 = false;
+                            String abc = parser.getText();
+                            b_svcCts = false;
                         }
                         break;
 

@@ -71,7 +71,7 @@ public class PostDetailAct extends AppCompatActivity {
 //        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         tv1 = (TextView)findViewById(R.id.detail_postTitle);
         tv2 = (TextView)findViewById(R.id.detail_postBody);
-        tv3 = (TextView)findViewById(R.id.detail_postNumStars);
+//        tv3 = (TextView)findViewById(R.id.detail_postNumStars);
         bt1 = (Button)findViewById(R.id.detail_bt);
         dm = (ImageView)findViewById(R.id.detail_star);
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -87,7 +87,8 @@ public class PostDetailAct extends AppCompatActivity {
         FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
         final String userId = user1.getUid(); // user 아이디 갖고옴 이걸 토대로 분류분류하면될
 
-
+    //처음 게시글 눌렀을때 별표가 작동을 안하니 오류잡아야됨
+    //댓글 log에는 잡히는데 댓글 가져오는게 안되서 확인
         DatabaseReference postRef =  FirebaseDatabase.getInstance().getReference().child("posts").child(key);
         postRef.runTransaction(new Transaction.Handler() {
             @Override

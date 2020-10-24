@@ -37,17 +37,21 @@ public class Fragment4_Adapter extends RecyclerView.Adapter<Fragment4_Adapter.My
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        final String check1 = data.get(position).getSvcNm();
-        final String check2 = data.get(position).getSvcCts();
+        final String check1 = data.get(position).getSvcId();
+        final String check2 = data.get(position).getSvcNm();
+        final String check3 = data.get(position).getJrsdDptAllNm();
+        final String check4 = data.get(position).getSportTgl();
+        final String check5 = data.get(position).getSvcCts();
 
         holder.text1.setText(data.get(position).getSvcNm());
         holder.text1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), Fragment4_detail.class);
-                intent.putExtra("title",check1);
-                intent.putExtra("title",check2);
-
+                intent.putExtra("SvcNm",check2);
+                intent.putExtra("JrsdDptAllNm",check3);
+                intent.putExtra("SportTgl",check4);
+                intent.putExtra("SvcCts",check5);
                 view.getContext().startActivity(intent);
             }
         });
